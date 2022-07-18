@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Js Class</title>
+  <script>
+
+    String.prototype.filter = function filter(bannedWords) {
+        return this.split(/\s+/).filter(s => !bannedWords.includes(s)).join(' ');
+    };
+
+    console.log("This house is not nice!".filter(['not']));
+
+    function bubbleSort(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            // Last i elements are already in place
+            for (var j = 0; j < arr.length - i - 1; j++) {
+            // Checking if the item at present iteration
+            // is greater than the next iteration
+            if (arr[j] > arr[j + 1]) {
+                // If the condition is true then swap them
+                var temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            }
+        }
+        // Print the sorted array
+        console.log(arr);
+    }
+
+    // This is an unsorted array
+    var arr1 = [63, 24, 35, 86, 4, 7, 95, 79];
+    var arr2 = [6, 4, 0, 3, -2, 1];
+
+    bubbleSort(arr1);
+    bubbleSort(arr2);
+
+
+    class Person {
+        constructor(name) {
+          this.name = name;
+        }
+
+        teach(subject) {
+          console.log(this.name + " is now teaching " + subject);
+        }
+    }
+
+    const person = {
+        setName: function (name) {
+            this.name = name;
+        },
+        teach: function (subject) {
+            console.log(this.name + " is now teaching " + subject);
+        },
+    };
+
+    console.log("Printing out the result of Teacher object one ... ");
+    const teacherOne = new Person("Person One");
+    teacherOne.teach("Web Application Programming.");
+
+    console.log("Printing out the result of Teacher object two ... ");
+    const teacherTwo = Object.create(person);
+    teacherTwo.setName("Person Two");
+    teacherTwo.teach("Software Engineering");
+
+
+    class PersonB {
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        greating() {
+          console.log(`Greetings, my name is ${this.name} and I am ${this.age} years old.`);
+        }
+        
+        salute() {
+          console.log(`Good morning!, and in case I dont see you, good afternoon, good evening and good night!`);
+        }
+    };
+
+    class Teacher extends PersonB {
+        constructor(name, age, department) {
+          super(name, age);
+          this.department = department;
+        }
+
+        greating() {
+          console.log(`Good day, my name is  ${this.name} and I am in the  ${this.department} department.`);
+        }
+        
+    };
+
+    class Student extends PersonB {
+        constructor(name, age, major) {
+            super(name, age);
+            this.major = major;
+        }
+
+        greating() {
+          console.log(`Hey, my name is ${this.name} and I am studying ${this.major}.`);
+        }
+
+    };
+
+    console.log("Printing out the result of Teacher... ");
+    const teacher = new Teacher("Teacher One", 30, "Web Application Programming");
+    teacher.greating();
+    teacher.salute();
+
+    console.log("Printing out the result of Teacher... ");
+    const student = new Student("Student One", 30, "Web Application Programming");
+    student.greating();
+    student.salute();
+
+    const personB = {
+        setName: function (name) {
+            this.name = name;
+        },
+        setAge: function (age) {
+            this.age = age;
+        },
+        greating: function() {
+            console.log(`Good day, my name is  ${this.name} and I am in the  ${this.department} department.`);
+        },
+        
+        salute() {
+          console.log(`Good morning!, and in case I dont see you, good afternoon, good evening and good night!`);
+        }
+    };
+
+    const teacherB = {
+        __proto__: personB,
+        setDepartment: function (department) {
+            this.department = department;
+        },
+        greating: function() {
+            console.log(`Good day, my name is  ${this.name} and I am in the  ${this.department} department.`);
+        }
+    };
+
+    const studentB = {
+        __proto__: personB,
+        setMajor: function (major) {
+            this.major = major;
+        },
+        greating: function() {
+            console.log(`Hey, my name is ${this.name} and I am studying ${this.major}.`);
+        }
+    };
+
+    console.log("Printing out the result of Teacher... ");
+    const teacher2 = Object.create(teacherB);
+    teacher2.setName("Teacher One");
+    teacher2.setAge(30);
+    teacher2.setDepartment("WAP");
+    teacher2.greating();
+    teacher2.salute();
+    
+    console.log("Printing out the result of Student... ");
+    const student2 = Object.create(studentB);
+    student2.setName("Student One");
+    student2.setAge(30);
+    student2.setMajor("WAP");
+    student2.greating();
+    student2.salute();
+
+  </script>
+</head>
+
+<body>
+
+  Look in the Chrome developer console to see the output. CTRL_SHIFT_J <br />
+  Or on Firefox with CTRL_SHIFT_K
+
+</body>
+
+</html>
