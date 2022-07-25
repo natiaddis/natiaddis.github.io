@@ -51,6 +51,10 @@
       return sum;
     }
 
+    function sum2(num) {
+      return num.reduce((mult, n) => mult+n, 0);
+    }
+
     function multiply(num) {
       mult = 1;
       for (let i = 0; i < num.length; ++i) {
@@ -59,8 +63,12 @@
       return mult;
     }
 
-    console.log("Excepted out of sum([1, 2, 3, 4]) is 10 " + myFunctionTest(10, sum([1, 2, 3, 4])))
-    console.log("Excepted out of multiply([1, 2, 3, 4]) is 24 " + myFunctionTest(24, multiply([1, 2, 3, 4])))
+    function multiply2(num) {
+      return num.reduce((mult, n) => mult*n, 1);
+    }
+
+    console.log("Excepted out of sum2([1, 2, 3, 4]) is 10 " + myFunctionTest(10, sum2([1, 2, 3, 4])))
+    console.log("Excepted out of multiply2([1, 2, 3, 4]) is 24 " + myFunctionTest(24, multiply2([1, 2, 3, 4])))
 
     function reverse(str) {
       reverseStr = "";
@@ -71,7 +79,11 @@
       return reverseStr;
     }
 
-    console.log("Excepted out of reverse(\"daniel\") is leinad " + myFunctionTest("leinad", reverse("daniel")));
+    function reverse2(str) {
+      return str.split('').reduce((reversed, character) => character + reversed, '');
+    }
+
+    console.log("Excepted out of reverse2(\"daniel\") is leinad " + myFunctionTest("leinad", reverse2("daniel")));
 
     function findLongestWord(words) {
       longestWord = 0;
@@ -95,9 +107,13 @@
       return longestWords;
     }
 
+    function filterLongWords2(words, wordLength) {
+      return words.filter(word => word.length > wordLength);
+    }
+
     console.log(
-      "Excepted out of filterLongWords([\"returns\", \"the\", \"length\", \"of\", \"the\", \"longest\", \"one\"]) is [\"returns\", \"longest\"] " +
-      myFunctionTestArrayEquality(["returns", "longest"], filterLongWords(["returns", "the", "length", "of", "the",
+      "Excepted out of filterLongWords2([\"returns\", \"the\", \"length\", \"of\", \"the\", \"longest\", \"one\"]) is [\"returns\", \"longest\"] " +
+      myFunctionTestArrayEquality(["returns", "longest"], filterLongWords2(["returns", "the", "length", "of", "the",
         "longest", "one"
       ], 6)));
 
